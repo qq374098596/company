@@ -15,17 +15,18 @@
 		
 <div class="header">
 	<div class="container">
-		<div class="title">您好，
-		<?php if(!empty($_SESSION['user'])): ?><a href="" style="color: red"><?php echo ($_SESSION['user']['name']); ?></a>
-		<?php else: endif; ?>
-		欢迎来到返乡创业网！</div>
+		<div class="title">您好，欢迎来到返乡创业网！</div>
 		<ul>
 			<li><a href="javascript:;">项目合作</a></li>
-			<li><a href="javascript:;">创业圈</a></li>
+			<li><a href="<?php echo U('Cyq/cyq');?>">创业圈</a></li>
 			<li><a href="javascript:;">微信</a></li>
 			<?php if(empty($_SESSION['user'])): ?><li class="user"><a href="<?php echo U('Login/login');?>">登录</a><a> / </a><a href="<?php echo U('Login/register');?>">注册</a></li>
 			<?php else: ?>
-				<li class="user"><a href="<?php echo U('Login/quit');?>">退出</a></li><?php endif; ?>
+				<li class="user">
+					<a href="<?php echo U('Ucenter/index');?>"><?php echo ($_SESSION['user']['name']); ?></a>
+					<a href="<?php echo U('Login/quit');?>">退出</a>
+					<!--<a href="login.html">登录</a><a> / </a><a href="register.html">注册</a>-->
+				</li><?php endif; ?>
 		</ul>
 	</div>
 </div>
@@ -34,7 +35,7 @@
 <!--导航-->
 <div class="nav">
 	<div class="container">
-		<a href="index.html"><img src="/fxpc/Public/Home/img/index/logo.png" /></a>
+		<a href="<?php echo U('/');?>"><img src="/fxpc/Public/Home/img/index/logo.png" /></a>
 		<ul>
 			<li class="index active"><a href="<?php echo U('/');?>">首页</a></li>
 			<li class="cyq"><a href="<?php echo U('Cyq/cyq');?>">创业圈</a></li>

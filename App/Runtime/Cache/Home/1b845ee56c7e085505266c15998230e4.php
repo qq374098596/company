@@ -17,7 +17,7 @@
 		<div class="title">您好，欢迎来到返乡创业网！</div>
 		<ul>
 			<li><a href="javascript:;">项目合作</a></li>
-			<li><a href="javascript:;">创业圈</a></li>
+			<li><a href="<?php echo U('Cyq/cyq');?>">创业圈</a></li>
 			<li><a href="javascript:;">微信</a></li>
 			<?php if(empty($_SESSION['user'])): ?><li class="user"><a href="<?php echo U('Login/login');?>">登录</a><a> / </a><a href="<?php echo U('Login/register');?>">注册</a></li>
 			<?php else: ?>
@@ -141,8 +141,8 @@
 							<li>我的加盟：<span>1</span></li>
 							<li>我的收藏：<span><?php echo ($collection); ?></span></li>
 							<li>我的积分：<span><?php echo ($integral); ?></span></li>
-							<li>我的主贴：<span><?php echo ($card); ?></span></li>
-							<li>我的点评：<span>26</span></li>
+							<li>我的主贴：<span><?php echo ($cardCount); ?></span></li>
+							<li>我的点评：<span><?php echo ($review); ?></span></li>
 						</ul>
 					</div>
 					
@@ -533,13 +533,14 @@
 
 				<!--登录密码-->
 				<div class="data-page dlmm-page">
+					{__TOKEN__}
 					<div class="title"><span>登录密码</span></div>
 					<ul>
-						<li><span>原密码：</span><input type="text" /></li>
-						<li><span>新密码：</span><input type="text" /></li>
-						<li><span>确认密码：</span><input type="text" /></li>
+						<li><span>原密码：</span><input id="password" type="text" /></li>
+						<li><span>新密码：</span><input id="newpwd" type="text" /></li>
+						<li><span>确认密码：</span><input id="repwd" type="text" /></li>
 					</ul>
-					<a class="updata" href="javascript:;">提交</a>
+					<a class="updata" id="changepwd" href="javascript:;">提交</a>
 				</div>
 				
 				<!--手机验证-->
@@ -878,77 +879,18 @@
 					<!--我的主贴-->
 					<div class="wdzt-sub-page sub-page">
 						<ul>
-							<li>
-								<img src="img/cyq/user1.png"/>
+							<?php if(is_array($card)): foreach($card as $key=>$v): ?><li>
+								<img src="<?php echo ($v["headimg"]); ?>"/>
 								<div class="tiezi-describe">
-									<h5><a href="javascript:;">创业测试：50个迹象表明你真该创业了!</a></h5>
+									<h5><a href="javascript:;"><?php echo ($v["title"]); ?></a></h5>
 									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
 									<span class="time">发布于 2018/11/15 14:36:59</span>
 									<span class="look">查看：<a>125489</a></span>
 									<span>|</span>
 									<span class="reply">回复：<a>59846</a></span>
 								</div>
-							</li>
-							
-							<li>
-								<img src="img/cyq/user1.png"/>
-								<div class="tiezi-describe">
-									<h5><a href="javascript:;">创业者如何白手起家创业？</a></h5>
-									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
-									<span class="time">发布于 2018/11/15 14:36:59</span>
-									<span class="look">查看：<a>125489</a></span>
-									<span>|</span>
-									<span class="reply">回复：<a>59846</a></span>
-								</div>
-							</li>
-							
-							<li>
-								<img src="img/cyq/user1.png"/>
-								<div class="tiezi-describe">
-									<h5><a href="javascript:;">不想外出打工了，试试这5个暴利创业小项目，低成本高回报</a></h5>
-									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
-									<span class="time">发布于 2018/11/15 14:36:59</span>
-									<span class="look">查看：<a>125489</a></span>
-									<span>|</span>
-									<span class="reply">回复：<a>59846</a></span>
-								</div>
-							</li>
-							
-							<li>
-								<img src="img/cyq/user1.png"/>
-								<div class="tiezi-describe">
-									<h5><a href="javascript:;">创业测试：50个迹象表明你真该创业了!</a></h5>
-									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
-									<span class="time">发布于 2018/11/15 14:36:59</span>
-									<span class="look">查看：<a>125489</a></span>
-									<span>|</span>
-									<span class="reply">回复：<a>59846</a></span>
-								</div>
-							</li>
-							
-							<li>
-								<img src="img/cyq/user1.png"/>
-								<div class="tiezi-describe">
-									<h5><a href="javascript:;">创业者如何白手起家创业？</a></h5>
-									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
-									<span class="time">发布于 2018/11/15 14:36:59</span>
-									<span class="look">查看：<a>125489</a></span>
-									<span>|</span>
-									<span class="reply">回复：<a>59846</a></span>
-								</div>
-							</li>
-							
-							<li>
-								<img src="img/cyq/user1.png"/>
-								<div class="tiezi-describe">
-									<h5><a href="javascript:;">不想外出打工了，试试这5个暴利创业小项目，低成本高回报</a></h5>
-									<span class="user-name"><a href="javascript:;">叮当你个猫</a></span>
-									<span class="time">发布于 2018/11/15 14:36:59</span>
-									<span class="look">查看：<a>125489</a></span>
-									<span>|</span>
-									<span class="reply">回复：<a>59846</a></span>
-								</div>
-							</li>
+							</li><?php endforeach; endif; ?>						
+				
 						</ul>
 						
 						<div class="wdzt-pagination  pagination"></div>
@@ -1231,4 +1173,30 @@
 	// 	$(this).siblings().removeClass('active');
 	// 	$(this).addClass('active');
 	// });
+
+	$('#changepwd').on('click',function(){
+		var id = '<?php echo ($_SESSION['user']['id']); ?>';
+		var token = $('input[name=__hash__]').val();
+		var password = $('#password').val();
+		var newpwd = $('#newpwd').val();
+		var repwd = $('#repwd').val();
+		$.ajax({
+			url:"<?php echo U('Ucenter/changePwd');?>",
+			data:{id:id,__hash__:token,password:password,newpwd:newpwd,repwd:repwd},
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				if (data.status == 0) {
+					if (data.error == "表单令牌错误") {
+						alert("不能频繁操作，请稍后重试！")
+					}else{
+						alert(data.error);
+					}
+					
+				}else{
+					alert("修改成功");
+				}
+			}
+		})
+	})
 </script>

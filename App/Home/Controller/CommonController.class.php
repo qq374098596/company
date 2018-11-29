@@ -60,7 +60,7 @@ class CommonController extends Controller{
 
 
 	/**
-	 * 获取初始化数据
+	 * 获取JSON数据
 	 */
 	public function json($data){
 		
@@ -77,11 +77,21 @@ class CommonController extends Controller{
 		return M('daoshi')->field('headimg,name,old,are,zizhi,xiangmu,xiangmuxiangqing,imglist')->select();
 	}
 
-	//读取帖子数据
-	public function card($limit){
+	/**
+	 *	读取帖子数据
+	 *	$uid [id]
+	 */
+	public function card($limit,$uid){
+		
+		if (!$uid) {
+			$m = array('t.uid=u.id');
+		}else{
+			$m = array('t.uid=u.id',$uid);
+		}
+		
 		$getAll = M('tiezi')
 		->table('__TIEZI__ as t')->join('__USER__ as u')
-		->field('t.title,t.time,u.headimg,u.nickname')->where('t.uid=u.id')->limit($limit)->select();
+		->field('t.title,t.time,u.headimg,u.nickname')->where($m)->limit($limit)->select();
 
 		return $getAll;
 	}
@@ -89,6 +99,30 @@ class CommonController extends Controller{
 	//读取严选项目数据
 	public function strict(){
 		return M('yanxuanpinpai')->field('imgsrc')->limit(10)->select();
+	}
+
+	/**
+	 *
+	 *	品牌信息
+	 *
+	 */
+	public function getReview(){
+		//单个品牌全部评论数
+		$allreview = M('dianping')->table('fanxiang_dianping d')->field('count(1)')->where('d.pinpaiid=p.id')->select(false);
+		//单个品牌评分总和
+		$allscore = M('dianping')->table('fanxiang_dianping d')->field('sum(d.pingfen)')->where('d.pinpaiid=p.id')->select(false);
+
+		//单个商品评论条数
+		$comment = M('dianping')->table('fanxiang_dianping d,fanxiang_pinglun pl')->where('d.id=pl.mid AND p.id=d.pinpaiid AND pl.mkind=1 AND pl.gid=0')->field('count(1)')->select(false);
+
+		// $c = M('dianping')->field("$allscore AND b.pingfen>=5")->select(false);
+		// $a = M('pinpai')->table('fanxiang_pinpai as p')->join('fanxiang_dianping as d')->where('d.pinpaiid=p.id')->group('p.id')->field('sum(d.pingfen)')->select();
+
+		//单个品牌信息重组
+		$brand = M('pinpai')->table('fanxiang_pinpai p')->field("p.id,p.name,p.imgsrc,p.tel,p.kind,(".$allreview.") allreview,(".$allscore.") allscore,round(((".$allreview." AND d.pingfen>=5)/(".$allreview."))*100) fen,(".$comment.") comment_count")->select();
+		
+		return $brand;
+		//$getAll = "select id,name,imgsrc,tel,kind from fanxiang_pinpai";
 	}
 }
 ?>

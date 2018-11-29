@@ -18,7 +18,7 @@
 		<div class="title">您好，欢迎来到返乡创业网！</div>
 		<ul>
 			<li><a href="javascript:;">项目合作</a></li>
-			<li><a href="javascript:;">创业圈</a></li>
+			<li><a href="<?php echo U('Cyq/cyq');?>">创业圈</a></li>
 			<li><a href="javascript:;">微信</a></li>
 			<?php if(empty($_SESSION['user'])): ?><li class="user"><a href="<?php echo U('Login/login');?>">登录</a><a> / </a><a href="<?php echo U('Login/register');?>">注册</a></li>
 			<?php else: ?>
