@@ -1,0 +1,328 @@
+{include file="public:head" /}
+		<link rel="stylesheet" type="text/css" href="__STATIC__/Home/css/index.css"/>
+	</head>
+	
+	<body>
+		<!--顶部-->
+		
+		{include file="public:header" /}		
+
+
+		<!--banner-->
+		<div class="banner-box">
+			<div class="container">
+				<img src="__STATIC__/Home/img/index/banner-xcx.png" />
+				<div class="input-group-box">
+					<form>
+						<div class="input-group">
+							{:token()}
+							<div class="pinpai"><p>意向品牌：</p><input type="text" id="brand" placeholder="请输入要查询的品牌" /></div>
+							<div class="dizhi">
+								<p>开店地址：</p>
+					      <div id="target">
+					        <div id="eprovinceName" class="form-group"><select></select></div>
+					        <div id="ecityName" class="form-group"><select></select></div>
+					        <div id="edistrictName" class="form-group"><select></select></div>
+					      </div>
+					      <input id="specific" placeholder="请输入要开店具体地址" />
+							</div>
+							<div class="lianxi"><p>联系方式：</p><input id="contact" onblur="blur(this)" type="text" placeholder="请输入微信号/手机号/邮箱" /></div>
+						</div>
+						
+						<div class="zhenduan">
+							<label><input type="button" id="but" value="开始诊断"></label>
+							<p>已有<span>1314</span>位用户成功诊断</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--一站式返乡创业平台-->
+		<div class="pingtai">
+			<div class="container">
+				<div class="text-box">
+					<img src="__STATIC__/Home/img/index/pingtai-title.png"/>
+					<a class="more" href="gywm.html"><img src="__STATIC__/Home/img/index/more.png" /></a>
+					<p>返乡创业集<span>· 导师指导 · 加盟点评 · 加盟诊断 · 严选品牌</span>  于一体打造全新模式，不仅有优秀创业文章供你查看还有众多优秀导师指导。</p>
+					<h6>ONE STOP HOME BUSINESS PLATFORM</h6>
+				</div>
+				
+				<div class="content-box">
+					<div class="content">
+						<h3>上海创扬信息技术有限公司</h3>
+						<p>上海创扬信息技术有限公司致力于成为中国最新锐的媒体运营。及文化产品整合机构，自成立以来，凭借良好的项目运营能力，一直服务于大众人群以及各种品牌。</p>
+						<img src="__STATIC__/Home/img/index/pingtai.png" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!--vue内容-->
+		<div id="content" v-cloak>
+			<!--加盟点评-->
+			<div class="dianping">
+				<div class="container">
+					<div class="text-box">
+						<img src="__STATIC__/Home/img/index/dianping-title.png" />
+						<a class="more" href="jmdp.html"><img src="__STATIC__/Home/img/index/more.png" /></a>
+						<p>真实加盟者点评，还原品牌真实面目！</p>
+						<h6>COMMENT ON JOINING</h6>
+					</div>
+					
+					<div class="content">
+						<div class="swiper-container">
+			        <div class="swiper-button-prev"></div>
+			        <div class="swiper-button-next"></div>
+			        <div class="swiper-wrapper">
+			        	<!--第一个点评-->
+		            <div class="swiper-slide" v-for="item in dianping">
+		            	<div class="dianping-detail">
+		            		<div class="dianping-people">
+		            			<div class="people-header"><img :src="item.header" /></div>
+		            			<p class="people-name">{{item.name}}</p>
+		            			<div class="dianpinged">
+		            				<p class="dianping-pinpai">{{item.profession}}</p>
+		            				<div class="star-box">
+		            					<div class="noactive"></div>
+		            					<div class="active" :style="{width:item.star*22+'px'}"></div>
+		            				</div>
+		            			</div>
+		            		</div>
+		            		<div class="dianping-text">
+		            			<p><a href="javascript:;">{{item.comment}}</a></p>
+		            		</div>
+		            	</div>
+		            	<div class="dianping-img"><img :src="item.img" /></div>
+		            </div>
+			        </div>
+			        <div class="swiper-pagination"></div>
+			    	</div>
+					</div>
+				</div>
+			</div>
+			
+			<!--创业导师-->
+			<div class="daoshi">
+				<div class="container">
+					<div class="text-box">
+						<img src="__STATIC__/Home/img/index/daoshi-title.png"/>
+						<a class="more" href="cyds.html"><img src="__STATIC__/Home/img/index/more.png" /></a>
+						<p>授人以鱼不如授人以渔，大量创业导师提供专业创业指导</p>
+						<h6>ENTERPRISE TUTOR</h6>
+					</div>
+					
+					<div class="content-box">
+						<div class="swiper-daoshi-prev"></div>
+		        <div class="swiper-daoshi-next"></div>
+						<div class="swiper-daoshi">
+					    <div class="swiper-wrapper">
+					      <div class="swiper-slide" v-for="daoshi in daoshi">
+					      	<div class="daoshi-di"></div>
+					      	<div class="daoshi-hover" :style="{background: 'url('+daoshi.bg+')'}">
+						      	<div class="daoshi-box">
+						      		<div class="daoshi-header">
+						      			<img src="img/index/niankang.png" />
+						      			<p>创业导师{{daoshi.name}}</p>
+						      		</div>
+						      		<div class="daoshi-describe">
+						      			<a :href="daoshi.jump"><p>{{daoshi.text}}</p></a>
+						      		</div>
+						      		<div class="daoshi-detail">
+						      			<div>
+						      				<p class="nl">年龄：{{daoshi.age}}岁</p>
+						      				<p class="zl">资历：{{daoshi.zili}}年</p>
+						      			</div>
+						      			<div>
+						      				<p class="xm">项目：{{daoshi.obj}}</p>
+						      				<p class="dz">地址：{{daoshi.address}}</p>
+						      			</div>
+						      		</div>
+						      	</div>
+					      	</div>
+					      </div>
+					    </div>
+					    
+					    <div class="swiper-pagination"></div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			
+			<!--创业圈-->
+			<div class="quan">
+				<div class="container">
+					<div class="text-box">
+						<img src="__STATIC__/Home/img/index/quan-title.png"/>
+						<a class="more" href="cyq.html"><img src="__STATIC__/Home/img/index/more.png" /></a>
+						<h6>BUSINESS CIRCLE</h6>
+						<p>全民参与-创业交流社区</p>
+					</div>
+					<div class="content-box">
+						
+						<ul class="container">
+							<li v-for="cyq in cyq">
+								<div class="quan-imgbox"><img :src="cyq.header" /></div>
+								<a :href="cyq.jump">{{cyq.title}}</a>
+								<p><img src="img/index/quan-plicon.png" /><span>发帖人：{{cyq.name}}</span>{{cyq.time}}</p>
+								<span>{{cyq.describe}}</span>
+							</li>
+						</ul>
+						<a href="cyq.html" class="quan-click" title="点击跳转创业圈"></a>
+					</div>
+				</div>
+			</div>
+			
+			<!--严选项目-->
+			<div class="yanxuan">
+			<div class="container">
+				<div class="text-box">
+					<img src="__STATIC__/Home/img/index/yanxuan-title.png"/>
+					<a class="more" href="yxxm.html"><img src="__STATIC__/Home/img/index/more.png" /></a>
+					<p>筛选优质项目，让好的品牌脱颖而出</p>
+					<h6>STRICT SELECTION OF PROJECTS</h6>
+				</div>
+				<div class="content-box">
+					<ul class="container">
+						<li v-for="yxxm in yxxm"><a :href="yxxm.jump"><img :src="yxxm.img" /></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		<!--底部-->
+		{include file="public:footer"}
+		
+	
+<script src="__STATIC__/Home/js/distpicker.data.js"></script>
+<script src="__STATIC__/Home/js/swiper.js"></script>
+<script src="__STATIC__/Home/js/vue.js"></script>
+<script>
+	
+	var vm = new Vue({
+		el: '#content',
+		data: {
+			dianping: [
+				{ header: 'img/index/header-img.png', name: '西瓜你个萝卜头', profession: '忆茶', star: 5, img: 'img/index/dianping2.png', comment: '签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导', },
+				{ header: 'img/index/header-img.png', name: '西瓜你个萝卜头', profession: '忆茶', star: 5, img: 'img/index/dianping2.png', comment: '签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导', },
+				{ header: 'img/index/header-img.png', name: '西瓜你个萝卜头', profession: '忆茶', star: 5, img: 'img/index/dianping2.png', comment: '签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导', },
+				{ header: 'img/index/header-img.png', name: '西瓜你个萝卜头', profession: '忆茶', star: 5, img: 'img/index/dianping2.png', comment: '签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导签合同前你是大爷什么都为你着想。签完合同之后交了钱哈哈你自己看着办吧 承诺你7万开店那是在做梦，反正签完合同你想让他们帮你干什么都是要钱跟抢没区别，之前承诺过得开店大力扶持，老师亲自上门指导', },
+			],
+			daoshi: [
+				{ name: '年康', header: 'img/index/niankang.png', jump:'javascript:;', bg: 'img/index/niankang-bg.png', age: 32, zili: 5, obj: '奶茶店', address: '安徽', text: '自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店自创品牌，目前已开5家奶茶分店' },
+				{ name: '樱木', header: 'img/index/yingmu.png', jump:'javascript:;', bg: 'img/index/yingmu-bg.png', age: 28, zili: 1, obj: '正新鸡排', address: '江西', text: '正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。正新鸡排加盟品牌，目前已开1家鸡排加盟分店。' },
+				{ name: '邵老师', header: 'img/index/shaolaoshi.png', jump:'javascript:;', bg: 'img/index/shaolaoshi-bg.png', age: 28, zili: 1, obj: '奶茶店', address: '江西', text: '邵老师曾经普通的公司白领，每天过着朝九晚六的上班生活，随着外卖市场的火热，越来越多的上班一族选择每天中午以外卖解决自己的就餐问题，看见市场需求的邵老师在经过仔细斟酌之后放弃稳定的工作，选择自己从未接触过的餐饮行业苦于没有行业经验，于是选择自己经常点......', },
+			],
+			cyq: [
+				{ header: 'img/index/quan1.png', title: '不要问怎么做，要问为什么做？', name: '叮当你个猫', jump: 'javascript:;', time: '2018-11-07', describe: '当别的毕业生还在为逝去的大学时光与再也无法追回的青川而感慨伤怀......', },
+				{ header: 'img/index/quan2.png', title: '对于90后的创业，不得不谈的故事', name: '叮当你个猫', jump: 'javascript:;', time: '2018-11-07', describe: '当别的毕业生还在为逝去的大学时光与再也无法追回的青川而感慨伤怀......', },
+				{ header: 'img/index/quan3.png', title: '90后小女孩创业成功的小故事', name: '叮当你个猫', jump: 'javascript:;', time: '2018-11-07', describe: '当别的毕业生还在为逝去的大学时光与再也无法追回的青川而感慨伤怀......', },
+				{ header: 'img/index/quan4.png', title: '创业的艰辛，学会创业！', name: '叮当你个猫', jump: 'javascript:;', time: '2018-11-07', describe: '当别的毕业生还在为逝去的大学时光与再也无法追回的青川而感慨伤怀......', },
+			],
+			yxxm: [ 
+				{ img: 'img/index/1-zxjp.png', jump: 'javascript:;' },
+				{ img: 'img/index/2-elm.png', jump: 'javascript:;' },
+				{ img: 'img/index/3-wqlm.png', jump: 'javascript:;' },
+				{ img: 'img/index/4-klz.png', jump: 'javascript:;' },
+				{ img: 'img/index/5-zl.png', jump: 'javascript:;' },
+				{ img: 'img/index/6-abie.png', jump: 'javascript:;' },
+				{ img: 'img/index/7-yjkd.png', jump: 'javascript:;' },
+				{ img: 'img/index/8-yzsp.png', jump: 'javascript:;' },
+				{ img: 'img/index/9-szss.png', jump: 'javascript:;' },
+				{ img: 'img/index/10-af.png', jump: 'javascript:;' },
+			]
+		},
+
+		// created:function(){
+			
+		// },
+
+		methods: {
+			
+		},
+	});
+	
+</script>
+<script>
+	//选择地区插件
+	$('#target').distpicker({
+		autoSelect: false
+	});
+	
+	//头部导航选择
+	$('.nav ul li').click(function(){
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
+	});
+	
+
+	
+	//点评轮播
+	var mySwiper = new Swiper ('.swiper-container', {
+    loop: true, // 循环模式选项
+    pagination: {
+      el: '.swiper-pagination',
+      clickable :true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+  
+  //导师轮播
+  var swiperDaoshi = new Swiper('.swiper-daoshi', {
+  	loop: true, // 循环模式选项
+    slidesPerView: 3,
+    spaceBetween: 5,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-daoshi-next',
+      prevEl: '.swiper-daoshi-prev',
+    },
+  });
+  
+  
+//获取页面网址内容
+//function pageName()
+//{
+//    var a = location.href;
+//    var b = a.split("/");
+//    var c = b.slice(b.length-1, b.length).toString(String).split(".");
+//    console.log(a,b,c,c.slice(0, 1));
+//    return console.log(c.slice(0, 1));
+//}
+//pageName();
+
+
+$('#but').on('click',function(){
+	//console.log($('#target option:selected').val());
+	var token = $('input[name=__token__]').val();
+	var eprovinceName = $('#eprovinceName option:selected').val();
+	var ecityName = $('#ecityName option:selected').val();
+	var edistrictName = $('#edistrictName option:selected').val();
+	var address = eprovinceName + ecityName + edistrictName +$('#specific').val();
+	console.log(address);
+	var brand = $('#brand').val();
+	var contact = $('#contact').val();
+	var uid = "{$Think.session.user.id}";
+	$.ajax({
+		url:"{:url('index/diagnosis')}",
+		data:{token,token,brand:brand,contact:contact,address:address,uid:uid},
+		type:"post",
+		dataType:"json",
+		success:function(data){
+			console.log(data)
+			// if (data.status == 0) {
+			// 	alert(data.error);
+			// }
+		}
+	})
+})
+</script>
